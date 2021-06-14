@@ -1,0 +1,42 @@
+<table >
+    <tr>
+        <th>  Stock-Name  </th> 
+        <th>  Cost-Price  </th>
+        <th>  Volume-Stock </th>
+         <th> Vwap </th>
+         <th> Valuation </th>
+         <th> Holding  </th>
+    </tr>
+    <tr *ngFor="let stock of getAllStocks()">
+        <td> {{stock.companyName}}  </td>
+        <td>  {{stock.costPrice}} </td>
+        <td>   {{stock.volume}} </td>
+        <td> {{stock.vwap}} </td>
+        <td>  {{(stock.costPrice < stock.vwap) ?"Fair-Price":"Over-Priced"}}</td>
+        <td>  {{stock.holding}}</td>
+ 
+    </tr>
+
+    
+</table>
+
+<hr>
+
+    Enter BidPrice
+    <input type="text" #myCost/>
+    Enter StockName
+    <input type="text" #myStock/>
+    <button (click)="getCostFromUser(myCost.value,myStock.value)">Submit</button>
+
+<div *ngIf="isAccepted;then buyTemplate else rejectedTemplate">
+    
+</div>
+
+<ng-template #buyTemplate>
+    <button [hidden]="!isAccepted" (click)="doBuyStock()">Buy Stock</button>
+</ng-template>
+<ng-template #rejectedTemplate>
+    <h3 [hidden]="isAccepted" > bid price is not aroung 1 percent than cost price</h3>
+</ng-template>
+
+

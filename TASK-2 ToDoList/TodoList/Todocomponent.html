@@ -1,0 +1,38 @@
+Enter Task Name
+<input type="text" #taskName/><br/>
+
+Select priority Task
+
+<select #taskPriority>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</select><br/>
+
+<button (click)="addOrUpdate(taskName.value, taskPriority.value)">Add Task</button>
+
+<h1> MY TO-DO LIST</h1>
+<table >
+  
+  <tr>
+      <th>Task-Name  </th> 
+      <th> Priority</th>
+      <th> Status</th>
+      <th>Action</th>
+  </tr>
+  <tr *ngFor="let task of getAllTasks()">
+      <td> {{task.taskName}}  </td>
+      <td> {{task.priority}} </td>
+      <td>  {{task.status}}</td>
+      <td>
+        <select #taskStatus (click) = "doChangeStatus(taskStatus.value, task.taskName)">
+          <option value="Pending" >Pending</option>
+          <option value="Finished">Finished</option>
+          <option value="Partially completed">Partially completed</option>
+        </select>
+      </td>
+  </tr>
+
+  
+</table>
